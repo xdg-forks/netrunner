@@ -82,6 +82,7 @@
   settings)
 
 (defmethod ig/init-key :web/lobby [_ {:keys [interval mongo time-inactive save-replay-by-default]}]
+  (println "DEBUG: web/lobby save-replay-by-default:" save-replay-by-default)
   (let [db (:db mongo)]
     [(tick #(lobby/clear-inactive-lobbies db time-inactive) interval)
      #_(tick #(angel-arena/check-for-inactivity db) interval)]))
@@ -168,10 +169,13 @@
 
 (defn start
   [& [{:keys [only]}]]
-  (let [config (server-config)]
-    (if only
-      (ig/init config only)
-      (ig/init config))))
+  (let [config (server-config)
+        system (if only
+                 (ig/init config only)
+                 (ig/init config))]
+    (println "DEBUG: Full system map:" 
+             (into {} (map (fn [[k v]] [k (if (fn? v) "<function>" v)]) system)))
+    system))
 
 (defn stop [system & [{:keys [only]}]]
   (when system

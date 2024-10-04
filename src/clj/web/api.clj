@@ -170,6 +170,7 @@
     {:name ::wrap-system
      :description "Adds the relevant integrant system pieces to requests"
      :wrap (fn [handler system]
+             (println "DEBUG: Full web/lobby value:" (get system :web/lobby))
              (fn [request]
                (-> request
                    (assoc :system/db (-> system :mongodb/connection :db))

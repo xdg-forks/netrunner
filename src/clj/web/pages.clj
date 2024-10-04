@@ -12,6 +12,7 @@
 (defn index-page
   ([request] (index-page request nil nil))
   ([{user :user server-mode :system/server-mode save-replay-by-default :system/save-replay-by-default} og replay-id]
+   (println "DEBUG: index-page save-replay-by-default:" save-replay-by-default)
    (html-response
      200
      (hiccup/html5
