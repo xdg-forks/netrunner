@@ -236,7 +236,8 @@
                                 :api-access false
                                 :password ""
                                 :protected false
-                                :save-replay (not= "casual" (:room @lobby-state))
+                                :save-replay (or (:system/save-replay-by-default @app-state)
+                                                 (not= "casual" (:room @lobby-state)))
                                 :singleton false
                                 :spectatorhands false
                                 :timed false

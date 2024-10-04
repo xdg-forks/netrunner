@@ -81,7 +81,7 @@
 (defmethod ig/init-key :web/auth [_ settings]
   settings)
 
-(defmethod ig/init-key :web/lobby [_ {:keys [interval mongo time-inactive]}]
+(defmethod ig/init-key :web/lobby [_ {:keys [interval mongo time-inactive save-replay-by-default]}]
   (let [db (:db mongo)]
     [(tick #(lobby/clear-inactive-lobbies db time-inactive) interval)
      #_(tick #(angel-arena/check-for-inactivity db) interval)]))

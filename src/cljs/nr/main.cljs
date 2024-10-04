@@ -30,9 +30,11 @@
        :component-did-mount
        (fn []
          (let [ver (get-server-data "version")
-               rid (get-server-data "replay-id")]
+               rid (get-server-data "replay-id")
+               save-replay-default (= "true" (get-server-data "save-replay-by-default"))]
            (swap! app-state assoc :app-version ver)
            (swap! app-state assoc :replay-id rid)
+           (swap! app-state assoc :save-replay-by-default save-replay-default)
            (when rid
              (navigate "/play"))
            (-> js/document (.addEventListener

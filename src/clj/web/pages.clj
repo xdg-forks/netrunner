@@ -11,7 +11,7 @@
 
 (defn index-page
   ([request] (index-page request nil nil))
-  ([{user :user server-mode :system/server-mode} og replay-id]
+  ([{user :user server-mode :system/server-mode save-replay-by-default :system/save-replay-by-default} og replay-id]
    (html-response
      200
      (hiccup/html5
@@ -38,7 +38,8 @@
         [:div {:style {:display "hidden"}
                :id "server-originated-data"
                :data-version @frontend-version
-               :data-replay-id replay-id}]
+               :data-replay-id replay-id
+               :data-save-replay-by-default (str (boolean save-replay-by-default))}]
         [:div#main-content]
         [:audio#ting
          [:source {:src "/sound/ting.mp3" :type "audio/mp3"}]

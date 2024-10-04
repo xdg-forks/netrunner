@@ -177,6 +177,7 @@
                    (assoc :system/auth (:web/auth system))
                    (assoc :system/chat (:web/chat system))
                    (assoc :system/email (:web/email system))
+                   (assoc :system/save-replay-by-default (get-in system [:web/lobby :save-replay-by-default]))
                    (handler))))}))
 
 (defn make-middleware [system]

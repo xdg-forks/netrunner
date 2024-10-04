@@ -16,7 +16,8 @@
                      :max-age 5184000}}
  :web/lobby {:interval 1000
              :mongo #ig/ref :mongodb/connection
-             :time-inactive 600}
+             :time-inactive 600
+             :save-replay-by-default true}
  :web/chat {:max-length 144
             ;; sliding window size in seconds
             :rate-window 60
